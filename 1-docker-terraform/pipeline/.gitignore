@@ -1,0 +1,6 @@
+# Bỏ qua các file môi trường ảo
+.venv/
+__pycache__/
+
+# Bỏ qua file dữ liệu kết quả
+*.parquet

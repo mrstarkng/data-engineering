@@ -1,0 +1,29 @@
+services:
+  # Service 1: Database Postgres
+  pgdatabase:
+    image: postgres:13  # Dùng bản 13 cho khớp với data cũ của bạn
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=ny_taxi
+    volumes:
+      # Map volume vào đúng đường dẫn /data như chúng ta đã fix
+      - ny_taxi_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # Service 2: pgAdmin (Giao diện quản lý)
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "8085:80"
+
+# Khai báo các Volume sẽ dùng
+volumes:
+  ny_taxi_postgres_data:
+  pgadmin_data:
